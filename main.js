@@ -4,7 +4,7 @@ let mainState = {
   preload: function() {
     //code to pull in the assets (sounds, images)
     game.load.image('bird', 'assets/Flappy_Bird.png');
-    game.load.image('pipe', 'assets/pipe.png')
+    game.load.image('pipe', 'assets/ppipe.png')
     // game.load.image("background", 'assets/bg.png');
   },
   create: function() {
@@ -32,6 +32,13 @@ let mainState = {
 
     //call addRowOfPipes function every so often
     this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+
+    //score counter
+    this.score = 0;
+    this.labelScore = game.add.text(20, 20, "0", {
+      font: "50px impact",
+      fill: "#ffffff"
+    });
   },
   update: function() {
     //this function is called 60 times per second. contains game logic.
@@ -39,12 +46,28 @@ let mainState = {
     //if the bird is too high or low - call the restartGame function
     if (this.bird.y < 0 || this.bird.y > 490)
       this.restartGame();
+
+    game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this);
+
+    //make the bird tilt after flying
+    if (this.bird.angle < 20)
+    this.bird.angle += 1;
   },
   // function to make the bird jump
   jump: function() {
 
     // add vertical velocity to the bird object
     this.bird.body.velocity.y = -350;
+
+    //part of the bird tilt animation in ^ the update function
+    let animation = game.add.tween(this.bird);
+
+    //change the angle of the bird by 20 degrees at 100 milliseconds
+    animation.to({angle: -20}, 100);
+
+    //start the animation
+    animation.start();
+
   },
 
   // allow the game to be restarted
@@ -78,6 +101,8 @@ let mainState = {
       if (i != gap && i != gap + 1)
         this.addOnePipe(400, i * 60 + 10)
     }
+    this.score += 1;
+    this.labelScore.text = this.score;
   }
 };
 
