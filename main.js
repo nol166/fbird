@@ -39,6 +39,9 @@ let mainState = {
       font: "50px impact",
       fill: "#ffffff"
     });
+
+    //for the tilt, move the anchor down and to the left
+    this.bird.anchor.setTo(-0.2, 0.5)
   },
   update: function() {
     //this function is called 60 times per second. contains game logic.
@@ -51,7 +54,7 @@ let mainState = {
 
     //make the bird tilt after flying
     if (this.bird.angle < 20)
-    this.bird.angle += 1;
+      this.bird.angle += 1;
   },
   // function to make the bird jump
   jump: function() {
@@ -63,7 +66,9 @@ let mainState = {
     let animation = game.add.tween(this.bird);
 
     //change the angle of the bird by 20 degrees at 100 milliseconds
-    animation.to({angle: -20}, 100);
+    animation.to({
+      angle: -20
+    }, 100);
 
     //start the animation
     animation.start();
