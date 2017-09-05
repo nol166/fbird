@@ -3,9 +3,10 @@ console.log("booyah")
 let mainState = {
   preload: function() {
     //code to pull in the assets (sounds, images)
-    game.load.image('bird', 'assets/Flappy_Bird.png');
+    game.load.image('bird', 'assets/cheep.png');
     game.load.image('pipe', 'assets/ppipe.png')
     // game.load.image("background", 'assets/bg.png');
+    game.load.audio('jump', 'assets/jump.wav')
   },
   create: function() {
     //code to set up the game and display sprites
@@ -42,6 +43,9 @@ let mainState = {
 
     //for the tilt, move the anchor down and to the left
     this.bird.anchor.setTo(-0.2, 0.5)
+
+    //pull in jump sound effect
+    this.jumpSound = game.add.audio('jump');
   },
   update: function() {
     //this function is called 60 times per second. contains game logic.
@@ -50,7 +54,7 @@ let mainState = {
     if (this.bird.y < 0 || this.bird.y > 490)
       this.restartGame();
 
-    game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this);
+    game.physics.arcade.overlap(this.bird, this.pipes, this.hitPipe, null, this);
 
     //make the bird tilt after flying
     if (this.bird.angle < 20)
@@ -58,6 +62,9 @@ let mainState = {
   },
   // function to make the bird jump
   jump: function() {
+    //stop the bird from jumping if dead
+    if (this.bird.alive == false)
+      return;
 
     // add vertical velocity to the bird object
     this.bird.body.velocity.y = -350;
@@ -72,6 +79,9 @@ let mainState = {
 
     //start the animation
     animation.start();
+
+    //play the sound for jumping
+    this.jumpSound.play();
 
   },
 
@@ -108,6 +118,24 @@ let mainState = {
     }
     this.score += 1;
     this.labelScore.text = this.score;
+  },
+  hitPipe: function() {
+    //lets the game know when a pipe is hit and what to do afterward
+
+    //if the bird has already hit a pipe, don't do anything
+    if (this.bird.alive == false)
+      return;
+
+    // set the alive to false
+    this.bird.alive = false;
+
+    //stop new pipes from generating
+    game.time.events.remove(this.timer);
+
+    //stop existing pipes from moving
+    this.pipes.forEach(function(p) {
+      p.body.velocity.x = 0;
+    }, this)
   }
 };
 
