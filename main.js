@@ -6,7 +6,9 @@ let mainState = {
     game.load.image('bird', 'assets/cheep.png');
     game.load.image('pipe', 'assets/ppipe.png')
     // game.load.image("background", 'assets/bg.png');
-    game.load.audio('jump', 'assets/jump.wav')
+    game.load.audio('jump', 'assets/sfx_wing.wav')
+    game.load.audio('hit', 'assets/sfx_hit.wav')
+
   },
   create: function() {
     //code to set up the game and display sprites
@@ -46,6 +48,9 @@ let mainState = {
 
     //pull in jump sound effect
     this.jumpSound = game.add.audio('jump');
+
+    //pull in sound effect for hitting pipe
+    this.hitSound = game.add.audio('hit')
   },
   update: function() {
     //this function is called 60 times per second. contains game logic.
@@ -128,6 +133,9 @@ let mainState = {
 
     // set the alive to false
     this.bird.alive = false;
+
+    //play the hit sound effect
+    this.hitSound.play();
 
     //stop new pipes from generating
     game.time.events.remove(this.timer);
