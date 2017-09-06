@@ -2,6 +2,7 @@ console.log("booyah")
 // phaser requires three things to exist in order to make a game (preload, create, and update). This is essentially the game.
 // initialize phaser - give the game a size
 let game = new Phaser.Game(400, 490);
+let music;
 
 // this is the menu state for the game. the game starts and ends with this state
 let menuState = {
@@ -53,6 +54,7 @@ let mainState = {
     game.load.audio('hit', 'assets/sfx_hit.wav')
     // game.load.image('background', 'assets/bg.png');
     game.load.image('background2', 'assets/bg2.png');
+    game.load.audio('joy', 'assets/joy.mp3')
 
   },
   create: function() {
@@ -99,6 +101,13 @@ let mainState = {
 
     //pull in sound effect for hitting pipe
     this.hitSound = game.add.audio('hit')
+
+    //pull in music
+    music = game.add.audio('joy');
+
+    //play music
+    music.play()
+
   },
   update: function() {
     //this function is called 60 times per second. contains game logic.
@@ -181,6 +190,8 @@ let mainState = {
 
     // set the alive to false
     this.bird.alive = false;
+
+    music.pause()
 
     //play the hit sound effect
     this.hitSound.play();
