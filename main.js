@@ -1,5 +1,47 @@
 console.log("booyah")
 // phaser requires three things to exist in order to make a game (preload, create, and update). This is essentially the game.
+// initialize phaser - give the game a size
+let game = new Phaser.Game(400, 490);
+
+// this is the menu state for the game. the game starts and ends with this state
+let menuState = {
+  preload: function() {
+    //code to pull in the assets (sounds, images)
+    game.load.image('background', 'assets/bg.png');
+  },
+
+  create: function() {
+    game.stage.backgroundColor = "71c5cf"
+    game.load.image('background', 'assets/bg.png')
+
+    //display the name of the game
+    let nameLabel = game.add.text(game.width / 2, 80, 'slappy fish', {
+      font: '50px Helvetica',
+      fill: '#ffffff',
+    });
+    nameLabel.anchor.setTo(0.5, 0.5);
+
+    let startLabel = game.add.text(game.width / 2, game.height - 80,
+      'Press spacebar to fly. Up arrow to start', {
+        font: '20px Arial',
+        fill: '#ffffff',
+      });
+
+    startLabel.anchor.setTo(0.5, 0.5)
+
+    let upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    upKey.onDown.add(this.start, this);
+  },
+
+  start: function() {
+    // Start the actual game
+    game.state.start('main');
+  },
+};
+
+game.state.add('menu', menuState);
+
+
 let mainState = {
   preload: function() {
     //code to pull in the assets (sounds, images)
@@ -93,7 +135,7 @@ let mainState = {
   // allow the game to be restarted
   restartGame: function() {
     // Start the 'main' state, which restarts the game
-    game.state.start('main');
+    game.state.start('menu');
   },
   addOnePipe: function(x, y) {
     //create pipe at x, y
@@ -147,11 +189,8 @@ let mainState = {
   }
 };
 
-// initialize phaser - give the game a size
-let game = new Phaser.Game(400, 490);
 
-// add the 'mainState' to the game
 game.state.add('main', mainState);
 
-//start the state to begin the game
-game.state.start('main')
+// start the menu
+game.state.start('menu')
