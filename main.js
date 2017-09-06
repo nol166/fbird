@@ -143,7 +143,7 @@ let mainState = {
     animation.start();
 
     //play the sound for jumping
-    this.jumpSound.play();
+    this.jumpSound.play('', 0, 0.5);
 
   },
 
