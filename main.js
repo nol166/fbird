@@ -12,24 +12,26 @@ let menuState = {
 
   create: function() {
     game.stage.backgroundColor = "71c5cf"
-    game.load.image('background', 'assets/bg.png')
+    game.add.image(0, 0, 'background')
 
     //display the name of the game
-    let nameLabel = game.add.text(game.width / 2, 80, 'slappy fish', {
+    let nameLabel = game.add.text(game.width / 2, 100, 'slappy fish', {
       font: '50px Helvetica',
       fill: '#ffffff',
     });
+    //position of the name of the game
     nameLabel.anchor.setTo(0.5, 0.5);
 
-    let startLabel = game.add.text(game.width / 2, game.height - 80,
-      'Press spacebar to fly. Up arrow to start', {
-        font: '20px Arial',
+    //display the instructions for play
+    let startLabel = game.add.text(game.width / 2, game.height - 30,
+      'Press spacebar to fly', {
+        font: '30px Helvetica',
         fill: '#ffffff',
       });
-
+    //position of the instructions
     startLabel.anchor.setTo(0.5, 0.5)
 
-    let upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    let upKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     upKey.onDown.add(this.start, this);
   },
 
@@ -47,14 +49,18 @@ let mainState = {
     //code to pull in the assets (sounds, images)
     game.load.image('bird', 'assets/cheep.png');
     game.load.image('pipe', 'assets/ppipe.png')
-    // game.load.image("background", 'assets/bg.png');
     game.load.audio('jump', 'assets/sfx_wing.wav')
     game.load.audio('hit', 'assets/sfx_hit.wav')
+    // game.load.image('background', 'assets/bg.png');
+    game.load.image('background2', 'assets/bg2.png');
 
   },
   create: function() {
     //code to set up the game and display sprites
     game.stage.backgroundColor = "71c5cf"
+
+    //add the background to the game
+    game.add.image(0, 0, 'background2')
 
     //set physics engine
     game.physics.startSystem(Phaser.Physics.ARCADE);
