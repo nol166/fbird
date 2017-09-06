@@ -1,4 +1,4 @@
-# fbird
+# slappy-bird
 a flappy bird clone
 
 
