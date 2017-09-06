@@ -195,7 +195,7 @@ let mainState = {
   }
 };
 
-
+// add the mainState (aka the game) to the game object
 game.state.add('main', mainState);
 
 // start the menu
