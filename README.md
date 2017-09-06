@@ -1,4 +1,4 @@
-# slappy-bird
+# slappy-fish
 a flappy bird clone
 
 
