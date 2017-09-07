@@ -6,6 +6,8 @@ let music;
 let highScore = 0
 let currentScore = 0
 
+localStorage.setItem('highScore', 0)
+
 
 // this is the menu state for the game. the game starts and ends with this state
 let menuState = {
@@ -25,7 +27,7 @@ let menuState = {
     });
 
     //display the high score from the localStorage object
-    let scoreLabel = game.add.text(game.width / 3 , game.height /3.5, "high score: " + localStorage.getItem('highScore'), {
+    let scoreLabel = game.add.text(game.width / 3, game.height / 3.5, "high score: " + localStorage.getItem('highScore'), {
       font: '25px Helvetica',
       fill: 'yellow',
     });
@@ -51,7 +53,7 @@ let menuState = {
     game.state.start('main');
   },
 };
-
+// add the menu to the game object
 game.state.add('menu', menuState);
 
 
