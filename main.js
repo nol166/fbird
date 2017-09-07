@@ -6,7 +6,10 @@ let music;
 let highScore = 0
 let currentScore = 0
 
-localStorage.setItem('highScore', 0)
+// if score is null then set it to something "0"
+if (!localStorage.getItem('highScore')) {
+  localStorage.setItem('highScore', 0)
+}
 
 
 // this is the menu state for the game. the game starts and ends with this state
