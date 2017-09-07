@@ -24,6 +24,7 @@ let menuState = {
       fill: '#ffffff',
     });
 
+    //display the high score from the localStorage object
     let scoreLabel = game.add.text(game.width / 3 , game.height /3.5, "high score: " + localStorage.getItem('highScore'), {
       font: '25px Helvetica',
       fill: 'yellow',
@@ -98,7 +99,7 @@ let mainState = {
     //score counter
     this.score = 0;
     this.labelScore = game.add.text(20, 20, "0", {
-      font: "50px impact",
+      font: "50px Helvetica",
       fill: "#ffffff"
     });
 
@@ -194,7 +195,7 @@ let mainState = {
     currentScore = this.score
 
     this.labelScore.text = this.score;
-    console.log(currentScore)
+    // console.log(currentScore)
   },
   hitPipe: function() {
     //lets the game know when a pipe is hit and what to do afterward
@@ -206,6 +207,7 @@ let mainState = {
     // set the alive to false
     this.bird.alive = false;
 
+    // stop the music when the fish hits the pipe
     music.pause()
 
     //play the hit sound effect
@@ -218,11 +220,13 @@ let mainState = {
     this.pipes.forEach(function(p) {
       p.body.velocity.x = 0;
     }, this)
+
+    // if the current score exceeds the high score, save current score as high score
     if (currentScore >= highScore) {
       highScore = currentScore
       localStorage.setItem("highScore", highScore)
     }
-    console.log(highScore)
+    // console.log(highScore)
   }
 };
 
