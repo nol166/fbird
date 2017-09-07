@@ -3,6 +3,9 @@ console.log("booyah")
 // initialize phaser - give the game a size
 let game = new Phaser.Game(400, 490);
 let music;
+let highScore = 0
+let currentScore = 0
+
 
 // this is the menu state for the game. the game starts and ends with this state
 let menuState = {
@@ -20,6 +23,12 @@ let menuState = {
       font: '50px Helvetica',
       fill: '#ffffff',
     });
+
+    let scoreLabel = game.add.text(game.width / 3 , game.height /3.5, "high score: " + localStorage.getItem('highScore'), {
+      font: '25px Helvetica',
+      fill: 'yellow',
+    });
+
     //position of the name of the game
     nameLabel.anchor.setTo(0.5, 0.5);
 
@@ -178,8 +187,14 @@ let mainState = {
       if (i != gap && i != gap + 1)
         this.addOnePipe(400, i * 60 + 10)
     }
+    // add one point when the user passes through the gap
     this.score += 1;
+
+    // set the high score score
+    currentScore = this.score
+
     this.labelScore.text = this.score;
+    console.log(currentScore)
   },
   hitPipe: function() {
     //lets the game know when a pipe is hit and what to do afterward
@@ -203,6 +218,11 @@ let mainState = {
     this.pipes.forEach(function(p) {
       p.body.velocity.x = 0;
     }, this)
+    if (currentScore >= highScore) {
+      highScore = currentScore
+      localStorage.setItem("highScore", highScore)
+    }
+    console.log(highScore)
   }
 };
 
