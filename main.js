@@ -32,7 +32,7 @@ let menuState = {
     //display the high score from the localStorage object
     let scoreLabel = game.add.text(game.width / 3, game.height / 3.5, "high score: " + localStorage.getItem('highScore'), {
       font: '25px Helvetica',
-      fill: 'yellow',
+      fill: 'teal',
     });
 
     //position of the name of the game
