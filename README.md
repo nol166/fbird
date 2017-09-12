@@ -9,3 +9,5 @@ I built a web based clone of the game using the phaser framework for HTML5 games
 ![Cheep Cheep Fish](/assets/cheep3d.png)
 
 Music provided by [HeatleyBros - Royalty Free Music](https://youtu.be/TdXFHKjJopI) 
+
+Try the game called [slappy fish](https://nol166.github.io/fbird/) 
