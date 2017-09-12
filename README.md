@@ -7,3 +7,5 @@ This game is based on the short-lived but *highly* addidictive game released for
 I built a web based clone of the game using the phaser framework for HTML5 games. It is my Q1 project for Galvanize web development immersive program.
 
 ![Cheep Cheep Fish](/assets/cheep3d.png)
+
+Music provided by [HeatleyBros - Royalty Free Music](https://youtu.be/aj3Hyxxo_Lk) 
