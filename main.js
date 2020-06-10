@@ -69,7 +69,7 @@ let mainState = {
     game.load.audio('hit', 'assets/sfx_hit.wav')
     // game.load.image('background', 'assets/bg.png');
     game.load.image('background2', 'assets/bg2.png');
-    game.load.audio('joy', 'assets/joy.mp3')
+    // game.load.audio('joy', 'assets/joy.mp3')
 
   },
   create: function() {
@@ -118,10 +118,10 @@ let mainState = {
     this.hitSound = game.add.audio('hit')
 
     //pull in music
-    music = game.add.audio('joy');
+    // music = game.add.audio('joy');
 
-    //play music
-    music.play()
+    // //play music
+    // music.play()
 
   },
   update: function() {
