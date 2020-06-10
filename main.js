@@ -2,7 +2,7 @@ console.log("booyah")
 // phaser requires three things to exist in order to make a game (preload, create, and update). This is essentially the game.
 // initialize phaser - give the game a size
 let game = new Phaser.Game(400, 490);
-let music;
+// let music;
 let highScore = 0
 let currentScore = 0
 
@@ -213,7 +213,7 @@ let mainState = {
     this.bird.alive = false;
 
     // stop the music when the fish hits the pipe
-    music.pause()
+    // music.pause()
 
     //play the hit sound effect
     this.hitSound.play();
